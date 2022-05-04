@@ -1,13 +1,24 @@
 import React from 'react'
 import { View } from 'react-native'
-import { createStackNavigator } from '@react-navigation/native-stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-const Stack = createStackNavigator()
+import Button from '../components/Button'
 
-const AppStack = () => (
-  <Stack.Navigator>
-    <Stack.Screen name='Apps' component={() => <View />} />
-  </Stack.Navigator>
+const Stack = createNativeStackNavigator()
+
+const Teste = () => (
+  <View style={{ flex: 1, backgroundColor: 'red', alignItems: 'center', justifyContent: 'center' }}>
+    <Button
+      text='botão'
+      onPress={() => {
+        console.log('apertou')
+      }}
+    />
+  </View>
 )
 
-export default AppStack
+export const AppStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen name='Apps' component={Teste} />
+  </Stack.Navigator>
+)
