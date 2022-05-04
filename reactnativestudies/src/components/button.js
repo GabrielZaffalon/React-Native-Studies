@@ -12,15 +12,17 @@ const ButtonComponent = ({ text, onPress }) => (
 const styles = StyleSheet.create({
   button: {
     paddingHorizontal: 24,
-    paddingVertical: 16,
+    paddingVertical: 10,
     backgroundColor: '#6750A4',
     borderRadius: 20,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    maxHeight: 40
   },
   title: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: 14,
+    letterSpacing: 0.1,
     fontWeight: 'bold'
   }
 })
