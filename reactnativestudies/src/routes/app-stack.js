@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import Button from '../components/button'
 import Card from '../components/card'
+import Clock from '../screens/clock'
 
 const Stack = createNativeStackNavigator()
 
@@ -26,6 +27,6 @@ const Teste = () => (
 
 export const AppStack = () => (
   <Stack.Navigator>
-    <Stack.Screen name='Apps' component={Teste} />
+    <Stack.Screen name='Apps' component={Clock} />
   </Stack.Navigator>
 )
