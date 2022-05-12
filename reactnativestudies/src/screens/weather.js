@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
 
+import { getWeatherFromLatAndLong } from '../services/weather'
+
 const Weather = () => {
   const [weather, setWeather] = useState()
   const [isLoading, setIsLoading] = useState(false)
@@ -12,10 +14,8 @@ const Weather = () => {
     const fetchWeather = async () => {
       setIsLoading(true)
       try {
-        const response = await fetch(
-          'https://api.openweathermap.org/data/2.5/weather?lat=-31.7397938&lon=-52.3450719&appid=75f0cae446d7abbbc2da3b9d2dba3e9d&units=metric'
-        )
-        setWeather(await response.json())
+        const response = await getWeatherFromLatAndLong()
+        setWeather(response)
       } catch (error) {
         console.log(error)
       } finally {
@@ -25,6 +25,7 @@ const Weather = () => {
     fetchWeather()
   }, [isFocused])
 
+  console.log(weather)
   return isLoading ? (
     <View style={styles.container}>
       <ActivityIndicator color='black' size='large' />
