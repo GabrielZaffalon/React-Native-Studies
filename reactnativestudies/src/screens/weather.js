@@ -25,7 +25,6 @@ const Weather = () => {
     fetchWeather()
   }, [isFocused])
 
-  console.log(weather)
   return isLoading ? (
     <View style={styles.container}>
       <ActivityIndicator color='black' size='large' />
