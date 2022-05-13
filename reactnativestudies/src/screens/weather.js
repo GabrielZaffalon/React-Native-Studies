@@ -1,29 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
-import { useIsFocused } from '@react-navigation/native'
 
-import { getWeatherFromLatAndLong } from '../services/weather'
+import useWeather from '../hooks/useWeather'
 
 const Weather = () => {
-  const [weather, setWeather] = useState()
-  const [isLoading, setIsLoading] = useState(false)
-
-  const isFocused = useIsFocused()
-
-  useEffect(() => {
-    const fetchWeather = async () => {
-      setIsLoading(true)
-      try {
-        const response = await getWeatherFromLatAndLong()
-        setWeather(response)
-      } catch (error) {
-        console.log(error)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-    fetchWeather()
-  }, [isFocused])
+  const { weather, isLoading } = useWeather()
 
   return isLoading ? (
     <View style={styles.container}>
