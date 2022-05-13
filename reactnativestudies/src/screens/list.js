@@ -20,7 +20,6 @@ const List = () => {
     <View style={styles.container}>
       <FlatList
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ flex: 1 }}
         data={SCREENS}
         renderItem={({ item }) => {
           return (
