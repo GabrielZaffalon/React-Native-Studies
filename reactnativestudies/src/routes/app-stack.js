@@ -6,6 +6,7 @@ import Button from '../components/button'
 import Card from '../components/card'
 import Clock from '../screens/clock'
 import Weather from '../screens/weather'
+import List from '../screens/list'
 
 const Stack = createNativeStackNavigator()
 
@@ -28,6 +29,8 @@ const Teste = () => (
 
 export const AppStack = () => (
   <Stack.Navigator>
-    <Stack.Screen name='Apps' component={Weather} />
+    <Stack.Screen name='Listagem' component={List} />
+    <Stack.Screen name='Relógio' component={Clock} />
+    <Stack.Screen name='Clima' component={Weather} />
   </Stack.Navigator>
 )
