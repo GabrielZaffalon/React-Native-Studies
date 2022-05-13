@@ -32,16 +32,6 @@ const List = () => {
           )
         }}
       />
-      {/* <Card
-        title='Relógio'
-        description='Mostra as horas'
-        onNavigateToApp={() => navigation.navigate('Relógio')}
-      />
-      <Card
-        title='Clima'
-        description='Mostra as informações climáticas da sua região'
-        onNavigateToApp={() => navigation.navigate('Clima')}
-      /> */}
     </View>
   )
 }
