@@ -10,6 +10,11 @@ const SCREENS = [
     title: 'Clima',
     description: 'Mostra as informações climáticas da sua região',
     navigate: 'Clima'
+  },
+  {
+    title: 'Localização',
+    description: 'Mostra as coordenadas da localização atual',
+    navigate: 'Localização'
   }
 ]
 
