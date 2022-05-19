@@ -14,7 +14,6 @@ const useLocation = () => {
     const subscription = Location.watchPositionAsync(
       { accuracy: Location.Accuracy.Balanced },
       local => {
-        console.log(local)
         setLocation(local)
       }
     )
@@ -22,7 +21,6 @@ const useLocation = () => {
     return () => subscription.then(sub => sub.remove())
   }, [status])
 
-  console.log(status)
   return { location, status }
 }
 

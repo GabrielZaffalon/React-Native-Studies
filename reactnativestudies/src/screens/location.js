@@ -1,29 +1,15 @@
-import React, { useCallback } from 'react'
-import { Text, View, ActivityIndicator, Linking, StyleSheet } from 'react-native'
+import React from 'react'
+import { Text, View, ActivityIndicator, StyleSheet } from 'react-native'
 
 import useLocation from '../hooks/useLocation'
-import Card from '../components/card'
-
-const OpenSettings = ({}) => {
-  const handlePress = useCallback(async () => {
-    await Linking.openSettings()
-  }, [])
-
-  return (
-    <Card
-      title={'Permissão negada'}
-      description={'Você negou a permissão de localização, vá até as configurações para permitir'}
-      onNavigateToApp={() => handlePress()}
-    />
-  )
-}
+import OpenSettings from '../components/open-settings'
 
 export default function App() {
   const { location, status } = useLocation()
 
   return !status?.canAskAgain ? (
     <View style={styles.container}>
-      <OpenSettings>Open Settings</OpenSettings>
+      <OpenSettings />
     </View>
   ) : !location ? (
     <View style={styles.container}>

@@ -2,11 +2,21 @@ import React from 'react'
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 
 import useWeather from '../hooks/useWeather'
+import useLocation from '../hooks/useLocation'
+import OpenSettings from '../components/open-settings'
 
 const Weather = () => {
-  const { weather, isLoading } = useWeather()
+  const { location, status } = useLocation()
+  const { weather, isLoading } = useWeather({
+    latitude: location?.coords?.latitude,
+    longitude: location?.coords?.longitude
+  })
 
-  return isLoading ? (
+  return !status?.canAskAgain ? (
+    <View style={styles.container}>
+      <OpenSettings />
+    </View>
+  ) : isLoading ? (
     <View style={styles.container}>
       <ActivityIndicator color='black' size='large' />
     </View>
