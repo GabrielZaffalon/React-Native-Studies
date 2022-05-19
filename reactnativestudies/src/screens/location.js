@@ -1,52 +1,38 @@
-import React, { useState, useEffect } from 'react'
-import { Platform, Text, View, ActivityIndicator, StyleSheet } from 'react-native'
-import * as Location from 'expo-location'
+import React, { useCallback } from 'react'
+import { Text, View, ActivityIndicator, Linking, StyleSheet } from 'react-native'
 
-export default function App() {
-  const [location, setLocation] = useState(null)
-  const [errorMsg, setErrorMsg] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
+import useLocation from '../hooks/useLocation'
+import Card from '../components/card'
 
-  useEffect(() => {
-    const fetchLocation = async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync()
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied')
-        return
-      }
-
-      setIsLoading(true)
-      try {
-        const response = await Location.getCurrentPositionAsync({})
-        setLocation(response)
-      } catch (error) {
-        console.log(error)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    fetchLocation()
-    // ;(async () => {
-    //   let { status } = await Location.requestForegroundPermissionsAsync()
-    //   if (status !== 'granted') {
-    //     setErrorMsg('Permission to access location was denied')
-    //     return
-    //   }
-
-    //   let location = await Location.getCurrentPositionAsync({})
-    //   setLocation(location)
-    // })()
+const OpenSettings = ({}) => {
+  const handlePress = useCallback(async () => {
+    await Linking.openSettings()
   }, [])
 
-  return isLoading ? (
+  return (
+    <Card
+      title={'Permissão negada'}
+      description={'Você negou a permissão de localização, vá até as configurações para permitir'}
+      onNavigateToApp={() => handlePress()}
+    />
+  )
+}
+
+export default function App() {
+  const { location, status } = useLocation()
+
+  return !status?.canAskAgain ? (
+    <View style={styles.container}>
+      <OpenSettings>Open Settings</OpenSettings>
+    </View>
+  ) : !location ? (
     <View style={styles.container}>
       <ActivityIndicator color='black' size='large' />
     </View>
   ) : (
     <View style={styles.container}>
-      <Text style={styles.paragraph}>Latitude: {JSON.stringify(location.coords.latitude)}</Text>
-      <Text style={styles.paragraph}>Longitude: {JSON.stringify(location.coords.longitude)}</Text>
+      <Text style={styles.text}>Latitude: {location?.coords?.latitude}</Text>
+      <Text style={styles.text}>Longitude: {location?.coords?.longitude}</Text>
     </View>
   )
 }
@@ -58,7 +44,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 20
   },
-  paragraph: {
+  text: {
     fontSize: 18,
     textAlign: 'center',
     color: 'black'

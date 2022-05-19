@@ -2,8 +2,6 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import Button from '../components/button'
-import Card from '../components/card'
 import Clock from '../screens/clock'
 import Weather from '../screens/weather'
 import List from '../screens/list'
