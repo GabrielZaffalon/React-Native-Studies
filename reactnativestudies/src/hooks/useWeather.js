@@ -3,9 +3,7 @@ import { useIsFocused } from '@react-navigation/native'
 
 import { getWeatherFromLatAndLong } from '../services/weather'
 
-const defaultUseWeatherParams = { latidude: -31.739793, longitude: -52.3450719 }
-
-const useWeather = ({ latitude, longitude } = defaultUseWeatherParams) => {
+const useWeather = ({ latitude, longitude }) => {
   const [weather, setWeather] = useState()
   const [isLoading, setIsLoading] = useState(false)
 
@@ -23,7 +21,10 @@ const useWeather = ({ latitude, longitude } = defaultUseWeatherParams) => {
         setIsLoading(false)
       }
     }
-    fetchWeather()
+
+    if (latitude && longitude) {
+      fetchWeather()
+    }
   }, [isFocused, latitude, longitude])
 
   return { weather, isLoading }
