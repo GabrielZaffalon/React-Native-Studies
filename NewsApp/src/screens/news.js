@@ -19,29 +19,31 @@ const News = ({ navigation }) => {
   const news = route.params.news
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <ImageBackground
-        source={{ uri: news.image }}
-        resizeMode='cover'
-        style={{ width, height, marginBottom: 16 }}
-      >
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon name='chevron-left' size={24} color='#FFF' style={styles.backIcon} />
-        </TouchableOpacity>
-      </ImageBackground>
-      <View style={styles.row}>
-        <Text style={styles.text}>{news.author}</Text>
-        <View style={styles.dot} />
-        <Text style={styles.text}>{news.date}</Text>
-      </View>
-      <Text style={styles.title}>{news.title}</Text>
-      <View style={styles.row}>
-        <Icon name='plus' size={24} color='#FFF' style={styles.rowIcon} />
-        <Icon name='volume-2' size={24} color='#FFF' style={styles.rowIcon} />
-        <Icon name='heart' size={24} color='#FFF' style={styles.rowIcon} />
-      </View>
-      <Text style={styles.news}>{news.news}</Text>
-    </ScrollView>
+    <View style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <ImageBackground
+          source={{ uri: news.image }}
+          resizeMode='cover'
+          style={{ width, height, marginBottom: 16 }}
+        >
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Icon name='chevron-left' size={24} color='#FFF' style={styles.backIcon} />
+          </TouchableOpacity>
+        </ImageBackground>
+        <View style={styles.row}>
+          <Text style={styles.text}>{news.author}</Text>
+          <View style={styles.dot} />
+          <Text style={styles.text}>{news.date}</Text>
+        </View>
+        <Text style={styles.title}>{news.title}</Text>
+        <View style={styles.row}>
+          <Icon name='plus' size={24} color='#FFF' style={styles.rowIcon} />
+          <Icon name='volume-2' size={24} color='#FFF' style={styles.rowIcon} />
+          <Icon name='heart' size={24} color='#FFF' style={styles.rowIcon} />
+        </View>
+        <Text style={styles.news}>{news.news}</Text>
+      </ScrollView>
+    </View>
   )
 }
 
