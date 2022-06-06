@@ -7,19 +7,26 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
-  Dimensions
+  useWindowDimensions
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
 
 const News = ({ navigation }) => {
+  const { width } = useWindowDimensions()
+  const height = width * 0.8
+
   const route = useRoute()
   const news = route.params.news
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <ImageBackground source={{ uri: news.image }} resizeMode='cover' style={styles.image}>
+      <ImageBackground
+        source={{ uri: news.image }}
+        resizeMode='cover'
+        style={{ width, height, marginBottom: 16 }}
+      >
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon name='chevron-left' size={40} color='#FFF' style={styles.backIcon} />
+          <Icon name='chevron-left' size={24} color='#FFF' style={styles.backIcon} />
         </TouchableOpacity>
       </ImageBackground>
       <View style={styles.row}>
@@ -29,17 +36,14 @@ const News = ({ navigation }) => {
       </View>
       <Text style={styles.title}>{news.title}</Text>
       <View style={styles.row}>
-        <Icon name='plus' size={30} color='#FFF' style={styles.rowIcon} />
-        <Icon name='volume-2' size={30} color='#FFF' style={styles.rowIcon} />
-        <Icon name='heart' size={30} color='#FFF' style={styles.rowIcon} />
+        <Icon name='plus' size={24} color='#FFF' style={styles.rowIcon} />
+        <Icon name='volume-2' size={24} color='#FFF' style={styles.rowIcon} />
+        <Icon name='heart' size={24} color='#FFF' style={styles.rowIcon} />
       </View>
       <Text style={styles.news}>{news.news}</Text>
     </ScrollView>
   )
 }
-
-const width = Dimensions.get('screen').width
-const height = width * 0.8
 
 const styles = StyleSheet.create({
   container: {
@@ -61,11 +65,6 @@ const styles = StyleSheet.create({
     width: 2,
     borderRadius: 5,
     marginHorizontal: 8
-  },
-  image: {
-    width,
-    height,
-    marginBottom: 16
   },
   title: {
     fontFamily: 'Inter-Bold',
