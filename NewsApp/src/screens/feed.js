@@ -1,5 +1,14 @@
 import React from 'react'
-import { View, ScrollView, FlatList, Text, StatusBar, StyleSheet } from 'react-native'
+import {
+  View,
+  ScrollView,
+  FlatList,
+  Text,
+  StatusBar,
+  StyleSheet,
+  TouchableOpacity
+} from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import RowCards from '../components/RowImagesCards'
 import ColumnCards from '../components/ColumnImagesCards'
@@ -11,6 +20,7 @@ const NEWS = [
     title:
       'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit',
     date: '2 days ago',
+    news: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     id: 1
   },
   {
@@ -20,6 +30,7 @@ const NEWS = [
     title:
       'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit',
     date: '2 days ago',
+    news: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     id: 2
   },
   {
@@ -28,6 +39,7 @@ const NEWS = [
     title:
       'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit',
     date: '2 days ago',
+    news: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     id: 3
   },
   {
@@ -37,11 +49,14 @@ const NEWS = [
     title:
       'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit',
     date: '2 days ago',
+    news: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     id: 4
   }
 ]
 
 const Feed = () => {
+  const navigation = useNavigation()
+
   return (
     <ScrollView nestedScrollEnabled={true} showsVerticalScrollIndicator={false}>
       <StatusBar translucent={true} backgroundColor={'transparent'} />
@@ -56,12 +71,14 @@ const Feed = () => {
           contentContainerStyle={{ paddingLeft: 22 }}
           renderItem={({ item }) => {
             return (
-              <RowCards
-                image={item.image}
-                author={item.author}
-                title={item.title}
-                date={item.date}
-              />
+              <TouchableOpacity onPress={() => navigation.navigate('News', { news: item })}>
+                <RowCards
+                  image={item.image}
+                  author={item.author}
+                  title={item.title}
+                  date={item.date}
+                />
+              </TouchableOpacity>
             )
           }}
         />
@@ -77,12 +94,14 @@ const Feed = () => {
           contentContainerStyle={{ paddingLeft: 22 }}
           renderItem={({ item }) => {
             return (
-              <ColumnCards
-                image={item.image}
-                author={item.author}
-                title={item.title}
-                date={item.date}
-              />
+              <TouchableOpacity onPress={() => navigation.navigate('News', { news: item })}>
+                <ColumnCards
+                  image={item.image}
+                  author={item.author}
+                  title={item.title}
+                  date={item.date}
+                />
+              </TouchableOpacity>
             )
           }}
         />
