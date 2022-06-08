@@ -9,7 +9,15 @@ const RowImagesCards = ({ image, author, title, date }) => {
         {title}
       </Text>
       <View style={styles.row}>
-        <Text style={styles.text}>{author}</Text>
+        {author.length > 18 ? (
+          <Text style={styles.shortText} ellipsizeMode='tail' numberOfLines={1}>
+            {author}
+          </Text>
+        ) : (
+          <Text style={styles.text} ellipsizeMode='tail' numberOfLines={1}>
+            {author}
+          </Text>
+        )}
         <View style={styles.dot} />
         <Text style={styles.text}>{date}</Text>
       </View>
@@ -51,6 +59,11 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: 'Inter-Regular',
     fontSize: 12
+  },
+  shortText: {
+    fontFamily: 'Inter-Regular',
+    fontSize: 12,
+    width: 120
   }
 })
 

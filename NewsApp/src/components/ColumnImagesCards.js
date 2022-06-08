@@ -8,7 +8,15 @@ const ColumnImagesCards = ({ image, author, title, date }) => {
         <Image source={{ uri: image }} style={styles.image} />
         <View style={styles.column}>
           <View style={styles.row}>
-            <Text style={styles.text}>{author}</Text>
+            {author.length > 18 ? (
+              <Text style={styles.shortText} ellipsizeMode='tail' numberOfLines={1}>
+                {author}
+              </Text>
+            ) : (
+              <Text style={styles.text} ellipsizeMode='tail' numberOfLines={1}>
+                {author}
+              </Text>
+            )}
             <View style={styles.dot} />
             <Text style={styles.text}>{date}</Text>
           </View>
@@ -62,11 +70,17 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 18,
     marginTop: 6,
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    width: 270
   },
   text: {
     fontFamily: 'Inter-Regular',
     fontSize: 16
+  },
+  shortText: {
+    fontFamily: 'Inter-Regular',
+    fontSize: 16,
+    width: 150
   }
 })
 
