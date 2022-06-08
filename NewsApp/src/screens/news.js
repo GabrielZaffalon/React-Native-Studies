@@ -11,7 +11,7 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
 
-import { formatDate } from '../components/DateFormatter'
+import { formatDate } from '../utils/DateFormatter'
 
 const News = ({ navigation }) => {
   const { width } = useWindowDimensions()

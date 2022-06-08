@@ -23,7 +23,7 @@ const Feed = () => {
     const fetchTopHeadLines = async () => {
       try {
         const response = await showHeadLines()
-        setTopHeadLines(response.data.articles)
+        setTopHeadLines(response.data.articles.filter(article => !!article.urlToImage))
       } catch (error) {
         console.log(error)
       }
@@ -48,7 +48,7 @@ const Feed = () => {
           keyExtractor={item => item.url}
           contentContainerStyle={{ paddingLeft: 22 }}
           renderItem={({ item }) => {
-            return item.urlToImage != null ? (
+            return (
               <TouchableOpacity onPress={() => navigation.navigate('News', { news: item })}>
                 <RowCards
                   image={item.urlToImage}
@@ -57,8 +57,6 @@ const Feed = () => {
                   date={item.publishedAt}
                 />
               </TouchableOpacity>
-            ) : (
-              <View />
             )
           }}
         />
@@ -73,7 +71,7 @@ const Feed = () => {
           keyExtractor={item => item.url}
           contentContainerStyle={{ paddingLeft: 22 }}
           renderItem={({ item }) => {
-            return item.urlToImage != null ? (
+            return (
               <TouchableOpacity onPress={() => navigation.navigate('News', { news: item })}>
                 <ColumnCards
                   image={item.urlToImage}
@@ -82,8 +80,6 @@ const Feed = () => {
                   date={item.publishedAt}
                 />
               </TouchableOpacity>
-            ) : (
-              <View />
             )
           }}
         />

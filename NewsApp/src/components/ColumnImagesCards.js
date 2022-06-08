@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image, Text, View, StyleSheet } from 'react-native'
 
-import { formatDate } from './DateFormatter'
+import { formatDate } from '../utils/DateFormatter'
 
 const ColumnImagesCards = ({ image, author, title, date }) => {
   return (
@@ -10,15 +10,13 @@ const ColumnImagesCards = ({ image, author, title, date }) => {
         <Image source={{ uri: image }} style={styles.image} />
         <View style={styles.column}>
           <View style={styles.row}>
-            {author.length > 18 ? (
-              <Text style={styles.shortText} ellipsizeMode='tail' numberOfLines={1}>
-                {author}
-              </Text>
-            ) : (
-              <Text style={styles.text} ellipsizeMode='tail' numberOfLines={1}>
-                {author}
-              </Text>
-            )}
+            <Text
+              style={author.length > 18 ? styles.shortText : styles.text}
+              ellipsizeMode='tail'
+              numberOfLines={1}
+            >
+              {author}
+            </Text>
             <View style={styles.dot} />
             <Text style={styles.text}>{formatDate(date)}</Text>
           </View>
