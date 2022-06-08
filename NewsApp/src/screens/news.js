@@ -11,6 +11,8 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
 
+import { formatDate } from '../components/DateFormatter'
+
 const News = ({ navigation }) => {
   const { width } = useWindowDimensions()
   const height = width * 0.8
@@ -33,7 +35,7 @@ const News = ({ navigation }) => {
         <View style={styles.row}>
           <Text style={styles.text}>{news.author}</Text>
           <View style={styles.dot} />
-          <Text style={styles.text}>{news.publishedAt}</Text>
+          <Text style={styles.text}>{formatDate(news.publishedAt)}</Text>
         </View>
         <Text style={styles.title}>{news.title}</Text>
         <View style={styles.row}>
