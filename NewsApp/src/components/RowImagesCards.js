@@ -1,6 +1,8 @@
 import React from 'react'
 import { Image, Text, View, StyleSheet } from 'react-native'
 
+import { formatDistanceStrictDate } from './DateFormatter'
+
 const RowImagesCards = ({ image, author, title, date }) => {
   return (
     <View style={styles.highlights}>
@@ -19,7 +21,7 @@ const RowImagesCards = ({ image, author, title, date }) => {
           </Text>
         )}
         <View style={styles.dot} />
-        <Text style={styles.text}>{date}</Text>
+        <Text style={styles.text}>{formatDistanceStrictDate(date)}</Text>
       </View>
     </View>
   )

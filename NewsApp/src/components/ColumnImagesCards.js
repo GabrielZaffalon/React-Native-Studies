@@ -1,6 +1,8 @@
 import React from 'react'
 import { Image, Text, View, StyleSheet } from 'react-native'
 
+import { formatDate } from './DateFormatter'
+
 const ColumnImagesCards = ({ image, author, title, date }) => {
   return (
     <View>
@@ -18,7 +20,7 @@ const ColumnImagesCards = ({ image, author, title, date }) => {
               </Text>
             )}
             <View style={styles.dot} />
-            <Text style={styles.text}>{date}</Text>
+            <Text style={styles.text}>{formatDate(date)}</Text>
           </View>
           <Text style={styles.title} ellipsizeMode='tail' numberOfLines={2}>
             {title}
