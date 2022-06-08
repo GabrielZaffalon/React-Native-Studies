@@ -1,6 +1,8 @@
 import React from 'react'
 import { Image, Text, View, StyleSheet } from 'react-native'
 
+import { formatDistanceStrictDate } from '../utils/DateFormatter'
+
 const RowImagesCards = ({ image, author, title, date }) => {
   return (
     <View style={styles.highlights}>
@@ -9,9 +11,15 @@ const RowImagesCards = ({ image, author, title, date }) => {
         {title}
       </Text>
       <View style={styles.row}>
-        <Text style={styles.text}>{author}</Text>
+        <Text
+          style={author.length > 18 ? styles.shortText : styles.text}
+          ellipsizeMode='tail'
+          numberOfLines={1}
+        >
+          {author}
+        </Text>
         <View style={styles.dot} />
-        <Text style={styles.text}>{date}</Text>
+        <Text style={styles.text}>{formatDistanceStrictDate(date)}</Text>
       </View>
     </View>
   )
@@ -51,6 +59,11 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: 'Inter-Regular',
     fontSize: 12
+  },
+  shortText: {
+    fontFamily: 'Inter-Regular',
+    fontSize: 12,
+    width: 120
   }
 })
 

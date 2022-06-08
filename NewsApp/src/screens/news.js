@@ -11,6 +11,8 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
 
+import { formatDate } from '../utils/DateFormatter'
+
 const News = ({ navigation }) => {
   const { width } = useWindowDimensions()
   const height = width * 0.8
@@ -22,7 +24,7 @@ const News = ({ navigation }) => {
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <ImageBackground
-          source={{ uri: news.image }}
+          source={{ uri: news.urlToImage }}
           resizeMode='cover'
           style={{ width, height, marginBottom: 16 }}
         >
@@ -33,7 +35,7 @@ const News = ({ navigation }) => {
         <View style={styles.row}>
           <Text style={styles.text}>{news.author}</Text>
           <View style={styles.dot} />
-          <Text style={styles.text}>{news.date}</Text>
+          <Text style={styles.text}>{formatDate(news.publishedAt)}</Text>
         </View>
         <Text style={styles.title}>{news.title}</Text>
         <View style={styles.row}>
@@ -41,7 +43,7 @@ const News = ({ navigation }) => {
           <Icon name='volume-2' size={24} color='#FFF' style={styles.rowIcon} />
           <Icon name='heart' size={24} color='#FFF' style={styles.rowIcon} />
         </View>
-        <Text style={styles.news}>{news.news}</Text>
+        <Text style={styles.news}>{news.content}</Text>
       </ScrollView>
     </View>
   )
