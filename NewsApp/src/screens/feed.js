@@ -20,15 +20,22 @@ import Button from '../components/button'
 const Feed = () => {
   const navigation = useNavigation()
 
+  const [page, setPage] = useState(1)
   const [topHeadLines, setTopHeadLines] = useState([])
+  const [totalResults, setTotalResults] = useState()
   const [loading, setIsLoading] = useState(false)
+
+  const placeHolderImage =
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Question_Mark.svg/1200px-Question_Mark.svg.png'
 
   useEffect(() => {
     const fetchTopHeadLines = async () => {
       setIsLoading(true)
+
       try {
-        const response = await showHeadLines()
-        setTopHeadLines(response.data.articles.filter(article => !!article.urlToImage))
+        const response = await showHeadLines(page)
+        setTopHeadLines(previousState => [...previousState, ...response.data.articles])
+        setTotalResults(response.data.totalResults)
       } catch (error) {
         console.log(error)
       } finally {
@@ -37,17 +44,17 @@ const Feed = () => {
     }
 
     fetchTopHeadLines()
-  }, [])
+  }, [page])
 
-  const highlights = topHeadLines.slice(0, 8)
-  const feed = topHeadLines.slice(8)
+  const highlights = topHeadLines.slice(0, 5)
+  const feed = topHeadLines.slice(5)
 
   return (
     <ScrollView nestedScrollEnabled={true} showsVerticalScrollIndicator={false}>
       <StatusBar translucent={true} backgroundColor={'transparent'} />
       <View style={styles.highlights}>
         <Text style={styles.title}>Technology</Text>
-        {loading ? (
+        {loading && page === 1 ? (
           <LoadingRowCard />
         ) : (
           <FlatList
@@ -60,7 +67,7 @@ const Feed = () => {
               return (
                 <TouchableOpacity onPress={() => navigation.navigate('News', { news: item })}>
                   <RowCards
-                    image={item.urlToImage}
+                    image={item.urlToImage != null ? item.urlToImage : placeHolderImage}
                     author={item.author != null ? item.author : 'Unkown'}
                     title={item.title}
                     date={item.publishedAt}
@@ -74,7 +81,7 @@ const Feed = () => {
       <View style={styles.feed}>
         <Text style={styles.title}>My Newsletter</Text>
 
-        {loading ? (
+        {loading && page === 1 ? (
           <LoadingColumCard />
         ) : (
           <View>
@@ -88,7 +95,7 @@ const Feed = () => {
                 return (
                   <TouchableOpacity onPress={() => navigation.navigate('News', { news: item })}>
                     <ColumnCards
-                      image={item.urlToImage}
+                      image={item.urlToImage === null ? placeHolderImage : item.urlToImage}
                       author={item.author != null ? item.author : 'Unkown'}
                       title={item.title}
                       date={item.publishedAt}
@@ -97,8 +104,17 @@ const Feed = () => {
                 )
               }}
             />
+
             <View style={styles.footer}>
-              <Button onPress={() => ''} />
+              {topHeadLines.length < totalResults ? (
+                <Button
+                  onPress={() => {
+                    setPage(page + 1)
+                  }}
+                />
+              ) : (
+                <View />
+              )}
             </View>
           </View>
         )}

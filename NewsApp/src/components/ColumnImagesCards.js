@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: 6,
     flexWrap: 'wrap',
-    width: 270
+    width: 260
   },
   text: {
     fontFamily: 'Inter-Regular',

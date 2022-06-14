@@ -20,11 +20,14 @@ const News = ({ navigation }) => {
   const route = useRoute()
   const news = route.params.news
 
+  const placeHolderImage =
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Question_Mark.svg/1200px-Question_Mark.svg.png'
+
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <ImageBackground
-          source={{ uri: news.urlToImage }}
+          source={{ uri: news.urlToImage != null ? news.urlToImage : placeHolderImage }}
           resizeMode='cover'
           style={{ width, height, marginBottom: 16 }}
         >
@@ -33,7 +36,7 @@ const News = ({ navigation }) => {
           </TouchableOpacity>
         </ImageBackground>
         <View style={styles.row}>
-          <Text style={styles.text}>{news.author}</Text>
+          <Text style={styles.text}>{news.author != null ? news.author : 'Unkown'}</Text>
           <View style={styles.dot} />
           <Text style={styles.text}>{formatDate(news.publishedAt)}</Text>
         </View>
