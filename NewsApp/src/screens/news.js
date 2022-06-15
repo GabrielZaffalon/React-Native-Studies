@@ -24,7 +24,11 @@ const News = ({ navigation }) => {
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <ImageBackground
-          source={{ uri: news.urlToImage }}
+          source={
+            news.urlToImage != null
+              ? { uri: news.urlToImage }
+              : require('../../assets/images/questionMark.png')
+          }
           resizeMode='cover'
           style={{ width, height, marginBottom: 16 }}
         >
@@ -33,7 +37,7 @@ const News = ({ navigation }) => {
           </TouchableOpacity>
         </ImageBackground>
         <View style={styles.row}>
-          <Text style={styles.text}>{news.author}</Text>
+          <Text style={styles.text}>{news.author != null ? news.author : 'Unkown'}</Text>
           <View style={styles.dot} />
           <Text style={styles.text}>{formatDate(news.publishedAt)}</Text>
         </View>

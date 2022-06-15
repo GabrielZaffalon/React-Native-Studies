@@ -16,19 +16,24 @@ import { showHeadLines } from '../services/news'
 import LoadingRowCard from '../components/LoadingRowCard'
 import LoadingColumCard from '../components/LoadingColumCard'
 import Button from '../components/button'
+import { questionMark } from '../../assets/images/questionMark.png'
 
 const Feed = () => {
   const navigation = useNavigation()
 
+  const [page, setPage] = useState(1)
   const [topHeadLines, setTopHeadLines] = useState([])
+  const [totalResults, setTotalResults] = useState()
   const [loading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const fetchTopHeadLines = async () => {
       setIsLoading(true)
+
       try {
-        const response = await showHeadLines()
-        setTopHeadLines(response.data.articles.filter(article => !!article.urlToImage))
+        const response = await showHeadLines(page)
+        setTopHeadLines(previousState => [...previousState, ...response.data.articles])
+        setTotalResults(response.data.totalResults)
       } catch (error) {
         console.log(error)
       } finally {
@@ -37,17 +42,17 @@ const Feed = () => {
     }
 
     fetchTopHeadLines()
-  }, [])
+  }, [page])
 
-  const highlights = topHeadLines.slice(0, 8)
-  const feed = topHeadLines.slice(8)
+  const highlights = topHeadLines.slice(0, 5)
+  const feed = topHeadLines.slice(5)
 
   return (
     <ScrollView nestedScrollEnabled={true} showsVerticalScrollIndicator={false}>
       <StatusBar translucent={true} backgroundColor={'transparent'} />
       <View style={styles.highlights}>
         <Text style={styles.title}>Technology</Text>
-        {loading ? (
+        {loading && page === 1 ? (
           <LoadingRowCard />
         ) : (
           <FlatList
@@ -74,7 +79,7 @@ const Feed = () => {
       <View style={styles.feed}>
         <Text style={styles.title}>My Newsletter</Text>
 
-        {loading ? (
+        {loading && page === 1 ? (
           <LoadingColumCard />
         ) : (
           <View>
@@ -97,8 +102,17 @@ const Feed = () => {
                 )
               }}
             />
+
             <View style={styles.footer}>
-              <Button onPress={() => ''} />
+              {topHeadLines.length < totalResults ? (
+                <Button
+                  onPress={() => {
+                    setPage(page + 1)
+                  }}
+                />
+              ) : (
+                <View />
+              )}
             </View>
           </View>
         )}

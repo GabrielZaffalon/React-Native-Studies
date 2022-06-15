@@ -7,7 +7,10 @@ const ColumnImagesCards = ({ image, author, title, date }) => {
   return (
     <View>
       <View style={styles.feed}>
-        <Image source={{ uri: image }} style={styles.image} />
+        <Image
+          source={image != null ? { uri: image } : require('../../assets/images/questionMark.png')}
+          style={styles.image}
+        />
         <View style={styles.column}>
           <View style={styles.row}>
             <Text
@@ -71,7 +74,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: 6,
     flexWrap: 'wrap',
-    width: 270
+    width: 260
   },
   text: {
     fontFamily: 'Inter-Regular',
