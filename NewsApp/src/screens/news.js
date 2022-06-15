@@ -20,14 +20,15 @@ const News = ({ navigation }) => {
   const route = useRoute()
   const news = route.params.news
 
-  const placeHolderImage =
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Question_Mark.svg/1200px-Question_Mark.svg.png'
-
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <ImageBackground
-          source={{ uri: news.urlToImage != null ? news.urlToImage : placeHolderImage }}
+          source={
+            news.urlToImage != null
+              ? { uri: news.urlToImage }
+              : require('../../assets/images/questionMark.png')
+          }
           resizeMode='cover'
           style={{ width, height, marginBottom: 16 }}
         >

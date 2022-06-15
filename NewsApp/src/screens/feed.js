@@ -16,6 +16,7 @@ import { showHeadLines } from '../services/news'
 import LoadingRowCard from '../components/LoadingRowCard'
 import LoadingColumCard from '../components/LoadingColumCard'
 import Button from '../components/button'
+import { questionMark } from '../../assets/images/questionMark.png'
 
 const Feed = () => {
   const navigation = useNavigation()
@@ -24,9 +25,6 @@ const Feed = () => {
   const [topHeadLines, setTopHeadLines] = useState([])
   const [totalResults, setTotalResults] = useState()
   const [loading, setIsLoading] = useState(false)
-
-  const placeHolderImage =
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Question_Mark.svg/1200px-Question_Mark.svg.png'
 
   useEffect(() => {
     const fetchTopHeadLines = async () => {
@@ -67,7 +65,7 @@ const Feed = () => {
               return (
                 <TouchableOpacity onPress={() => navigation.navigate('News', { news: item })}>
                   <RowCards
-                    image={item.urlToImage != null ? item.urlToImage : placeHolderImage}
+                    image={item.urlToImage}
                     author={item.author != null ? item.author : 'Unkown'}
                     title={item.title}
                     date={item.publishedAt}
@@ -95,7 +93,7 @@ const Feed = () => {
                 return (
                   <TouchableOpacity onPress={() => navigation.navigate('News', { news: item })}>
                     <ColumnCards
-                      image={item.urlToImage === null ? placeHolderImage : item.urlToImage}
+                      image={item.urlToImage}
                       author={item.author != null ? item.author : 'Unkown'}
                       title={item.title}
                       date={item.publishedAt}

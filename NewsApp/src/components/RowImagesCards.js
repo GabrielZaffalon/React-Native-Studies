@@ -6,7 +6,10 @@ import { formatDistanceStrictDate } from '../utils/DateFormatter'
 const RowImagesCards = ({ image, author, title, date }) => {
   return (
     <View style={styles.highlights}>
-      <Image source={{ uri: image }} style={styles.image} />
+      <Image
+        source={image != null ? { uri: image } : require('../../assets/images/questionMark.png')}
+        style={styles.image}
+      />
       <Text style={styles.title} ellipsizeMode='tail' numberOfLines={2}>
         {title}
       </Text>
