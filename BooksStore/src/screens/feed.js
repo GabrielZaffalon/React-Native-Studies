@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -58,6 +59,8 @@ const BOOKS = [
 ];
 
 const Feed = () => {
+  const navigation = useNavigation();
+
   return (
     <Fragment>
       <ScrollView
@@ -83,7 +86,8 @@ const Feed = () => {
             contentContainerStyle={{paddingLeft: 22}}
             renderItem={({item}) => {
               return (
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('Book', {book: item})}>
                   <RowCard
                     image={item.capa}
                     author={item.autor}
@@ -109,7 +113,8 @@ const Feed = () => {
               }}
               renderItem={({item}) => {
                 return (
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate('Book', {book: item})}>
                     <ColumnCard
                       image={item.capa}
                       author={item.autor}
