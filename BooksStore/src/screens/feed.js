@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {
   View,
   ScrollView,
@@ -59,7 +59,7 @@ const BOOKS = [
 
 const Feed = () => {
   return (
-    <View>
+    <Fragment>
       <ScrollView
         nestedScrollEnabled={true}
         showsVerticalScrollIndicator={false}>
@@ -159,7 +159,7 @@ const Feed = () => {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </Fragment>
   );
 };
 
