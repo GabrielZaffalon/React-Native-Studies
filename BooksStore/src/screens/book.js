@@ -22,64 +22,66 @@ const Book = () => {
   const book = route.params.book;
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon
-            name="chevron-back-outline"
-            size={24}
-            color="#000"
-            style={styles.icon}
-          />
-        </TouchableOpacity>
-        <View style={styles.row}>
-          <TouchableOpacity onPress={() => {}}>
-            <Icon name="bookmark-outline" size={24} color="#000" />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => {}}>
+    <Fragment>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Icon
-              name="ellipsis-vertical"
+              name="chevron-back-outline"
               size={24}
               color="#000"
               style={styles.icon}
             />
           </TouchableOpacity>
+          <View style={styles.row}>
+            <TouchableOpacity onPress={() => {}}>
+              <Icon name="bookmark-outline" size={24} color="#000" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {}}>
+              <Icon
+                name="ellipsis-vertical"
+                size={24}
+                color="#000"
+                style={styles.icon}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-      <View style={styles.center}>
-        <Image source={{uri: book.capa}} style={styles.image} />
-      </View>
-      <View style={styles.center}>
-        <Text style={styles.title}>{book.titulo}</Text>
-        <Text style={styles.author}>{book.autor}</Text>
-        <View style={styles.row}>
-          <Icon name="star" size={18} color="#FFC41F" />
-          <Icon name="star" size={18} color="#FFC41F" />
-          <Icon name="star" size={18} color="#FFC41F" />
-          <Icon name="star-half" size={18} color="#FFC41F" />
-          <Icon name="star-outline" size={18} color="#FFC41F" />
-          <Text
-            style={{
-              color: '#000',
-              fontFamily: 'Poppins-Regular',
-              marginLeft: 10,
-              fontSize: 14,
-            }}>
-            4.5
-          </Text>
-          <Text
-            style={{
-              fontSize: 14,
-              fontFamily: 'Poppins-Regular',
-              color: '#9C9EA8',
-              alignItems: 'center',
-            }}>
-            {' '}
-            / 5.0
-          </Text>
+        <View style={styles.center}>
+          <Image source={{uri: book.capa}} style={styles.image} />
         </View>
-      </View>
-      <Text style={styles.text}>{book.resumo}</Text>
+        <View style={styles.center}>
+          <Text style={styles.title}>{book.titulo}</Text>
+          <Text style={styles.author}>{book.autor}</Text>
+          <View style={styles.row}>
+            <Icon name="star" size={18} color="#FFC41F" />
+            <Icon name="star" size={18} color="#FFC41F" />
+            <Icon name="star" size={18} color="#FFC41F" />
+            <Icon name="star-half" size={18} color="#FFC41F" />
+            <Icon name="star-outline" size={18} color="#FFC41F" />
+            <Text
+              style={{
+                color: '#000',
+                fontFamily: 'Poppins-Regular',
+                marginLeft: 10,
+                fontSize: 14,
+              }}>
+              4.5
+            </Text>
+            <Text
+              style={{
+                fontSize: 14,
+                fontFamily: 'Poppins-Regular',
+                color: '#9C9EA8',
+                alignItems: 'center',
+              }}>
+              {' '}
+              / 5.0
+            </Text>
+          </View>
+        </View>
+        <Text style={styles.text}>{book.resumo}</Text>
+      </ScrollView>
       <View style={styles.rowButton}>
         <Button
           variant="secondary"
@@ -97,7 +99,7 @@ const Book = () => {
       <View style={styles.button}>
         <Button title="Compre agora por R$49,99" onPress={() => {}} />
       </View>
-    </ScrollView>
+    </Fragment>
   );
 };
 
