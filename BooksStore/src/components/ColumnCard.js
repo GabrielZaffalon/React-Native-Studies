@@ -10,10 +10,14 @@ const ColumnCard = ({image, author, title}) => {
         <Image source={{uri: image}} style={styles.image} />
         <View style={styles.column}>
           <View style={styles.row}>
-            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.title} ellipsizeMode="tail" numberOfLines={2}>
+              {title}
+            </Text>
             <Icon name="bookmark-outline" size={20} color="#000" />
           </View>
-          <Text style={styles.text}>{author}</Text>
+          <Text style={styles.author} ellipsizeMode="tail" numberOfLines={1}>
+            {author}
+          </Text>
           <View style={styles.row}>
             <Icon name="star" size={20} color="#FFC41F" />
             <Icon name="star" size={20} color="#FFC41F" />
@@ -56,13 +60,21 @@ const styles = StyleSheet.create({
     color: '#000',
     fontSize: 16,
     flexWrap: 'wrap',
-    width: 260,
+    width: 200,
+    marginRight: 60,
   },
   text: {
     fontFamily: 'Poppins-Regular',
     fontSize: 12,
     color: '#9C9EA8',
     marginBottom: 22,
+  },
+  author: {
+    fontFamily: 'Poppins-Regular',
+    fontSize: 12,
+    color: '#9C9EA8',
+    marginBottom: 22,
+    width: 200,
   },
   estrelas: {
     color: 'yellow',
