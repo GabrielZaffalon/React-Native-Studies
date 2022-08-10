@@ -8,7 +8,9 @@ const RowCard = ({image, author, title}) => {
       <Text style={styles.title} numberOfLines={2}>
         {title}
       </Text>
-      <Text style={styles.author}>{author}</Text>
+      <Text style={styles.author} ellipsizeMode="tail" numberOfLines={1}>
+        {author}
+      </Text>
     </View>
   );
 };
@@ -39,6 +41,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
     fontSize: 12,
     color: '#9C9EA8',
+    width: 126,
   },
 });
 
