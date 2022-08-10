@@ -11,6 +11,7 @@ provider.interceptors.request.use(config => {
     params: {
       ...config.params,
       key: Config.BOOKS_API_KEY,
+      langRestrict: 'pt',
     },
   };
 });
