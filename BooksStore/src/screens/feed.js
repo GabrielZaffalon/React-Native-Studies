@@ -13,7 +13,7 @@ import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import RowCard from '../components/rowCard';
-import ColumnCard from '../components/ColumnCard';
+import ColumnCard from '../components/columnCard';
 import {showBooks} from '../services/books';
 
 const Feed = () => {
